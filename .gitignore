@@ -4,3 +4,25 @@
 *.jar
 *.war
 *.ear
+
+# Eclipse
+.metadata
+target/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+.settings/
+.loadpath
+.classpath
+.project
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+#Vaadin
+src/main/webapp/VAADIN/gwt-unitCache/
+src/main/webapp/VAADIN/widgetsets/*
+
+#Storage
+src/main/webapp/WEB-INF/storage/live/pmml/*
