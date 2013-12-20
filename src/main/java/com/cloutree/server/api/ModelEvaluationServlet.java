@@ -38,6 +38,8 @@ import com.cloutree.server.session.ClouTreeSession;
  *
  * Since 30.08.2013
  */
+
+@Deprecated
 public class ModelEvaluationServlet extends HttpServlet {
     
     static Logger log = Logger.getLogger(ModelEvaluationServlet.class.getName());

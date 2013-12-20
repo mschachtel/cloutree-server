@@ -26,6 +26,8 @@ import com.cloutree.server.persistence.entity.User;
  *
  * Since 30.08.2013
  */
+
+@Deprecated
 public class ModelParamaterServlet extends HttpServlet {
     
     static Logger log = Logger.getLogger(ModelParamaterServlet.class.getName());

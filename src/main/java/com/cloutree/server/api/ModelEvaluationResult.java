@@ -23,6 +23,8 @@ import com.cloutree.modelevaluator.PredictiveModelResult;
  *
  * Since 09.09.2013
  */
+
+@Deprecated
 public class ModelEvaluationResult {
 
     private String user = "";

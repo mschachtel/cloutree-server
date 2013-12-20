@@ -12,6 +12,7 @@
 		<class>com.cloutree.server.persistence.entity.log.ApiCall</class>
 		<class>com.cloutree.server.persistence.entity.Tenant</class>
 		<class>com.cloutree.server.persistence.entity.Instance</class>
+		<class>com.cloutree.server.persistence.entity.Apihost</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/cloutree"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

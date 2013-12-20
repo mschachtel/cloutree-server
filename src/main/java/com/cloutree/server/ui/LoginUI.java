@@ -7,6 +7,7 @@ package com.cloutree.server.ui;
 
 import java.io.File;
 
+import com.cloutree.server.config.CloutreeConfiguration;
 import com.cloutree.server.permission.UserManager;
 import com.cloutree.server.session.ClouTreeSession;
 import com.cloutree.server.ui.navigation.Frames;
@@ -118,7 +119,7 @@ public class LoginUI extends CustomComponent implements Button.ClickListener, Vi
 		/* MenuBar */
 		// About
 		MenuBar.MenuItem about = menuBar.addItem("About ClouTree", null);
-		about.addItem("Version (TBD)", null);
+		about.addItem("Version: " + CloutreeConfiguration.getVersion(), null);
 		
 		// Enter-Listener for login
 		ShortcutListener enterListener = new ShortcutListener("ENTER", ShortcutAction.KeyCode.ENTER, null) {

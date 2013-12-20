@@ -18,23 +18,18 @@
 		</init-param>
 	</servlet>
 	<servlet>
-		<servlet-name>ModelEvaluationServlet</servlet-name>
-		<servlet-class>com.cloutree.server.api.ModelEvaluationServlet</servlet-class>
-		<init-param>
-			<description>
-			Vaadin UI class to use</description>
-			<param-name>UI</param-name>
-			<param-value>com.cloutree.server.ui.CloutreeUI</param-value>
-		</init-param>
-	</servlet>
+        <servlet-name>ApiRegistrationServlet</servlet-name>
+        <servlet-class>com.cloutree.server.api.registration.ApiRegistrationServlet</servlet-class>
+    </servlet>
 	<servlet-mapping>
 		<servlet-name>Cloutree</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
+	
 	<servlet-mapping>
-		<servlet-name>ModelEvaluationServlet</servlet-name>
-		<url-pattern>/api/modeleval</url-pattern>
-	</servlet-mapping>
+        <servlet-name>ApiRegistrationServlet</servlet-name>
+        <url-pattern>/api/register</url-pattern>
+    </servlet-mapping>
 	
 	<servlet-mapping>
             <servlet-name>default</servlet-name>

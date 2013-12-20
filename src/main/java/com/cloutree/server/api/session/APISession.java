@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.cloutree.server.permission.PasswordService;
+import com.cloutree.server.permission.Permissions;
 import com.cloutree.server.persistence.entity.User;
 import com.cloutree.server.persistence.service.UserService;
 
@@ -22,6 +23,7 @@ import com.cloutree.server.persistence.service.UserService;
  *
  * Since 18.07.2013
  */
+
 public class APISession {
     
     static Logger log = Logger.getLogger(APISession.class.getName());
@@ -64,21 +66,24 @@ public class APISession {
 		if(user == null || !user.getActive()) {
 		    log.log(Level.INFO, username + " not logged in. Null or inactive.");
 		    return false;
+		} else if(!user.getPermissionList().contains(Permissions.API)){
+			log.log(Level.INFO, username + " not permitted to use API");
+		    return false;
 		} else {
 		    
 		    boolean authenticated;
 		    
 		    try {
-			authenticated = passwordService.authenticate(password, user.getPassword(), user.getSalt());
-		    } catch (Exception e) {
-			log.log(Level.SEVERE, e.getMessage());
-			return false;
+				authenticated = passwordService.authenticate(password, user.getPassword(), user.getSalt());
+			    } catch (Exception e) {
+					log.log(Level.SEVERE, e.getMessage());
+					return false;
 		    }
 		    
 		    if (authenticated) {
-			sessionLogin(user, req);
-			log.log(Level.INFO, "API-User logged in: " + user.getUsername());
-			return true;
+				sessionLogin(user, req);
+				log.log(Level.INFO, "API-User logged in: " + user.getUsername());
+				return true;
 		    }
 		    
 		    return false;

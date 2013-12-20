@@ -5,12 +5,11 @@
 
 package com.cloutree.server.config;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
-import com.vaadin.server.VaadinService;
 
 public class CloutreeConfiguration {
 
@@ -18,17 +17,34 @@ public class CloutreeConfiguration {
 	
 	private static String version;
 	
+	private static boolean initiated = false;
+	
 	public static void init() throws FileNotFoundException, IOException {
-		String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
+
+		String fileName = "cloutree.properties" ; 
+		InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
 		
 		props = new Properties();
-		props.load(new FileInputStream(basepath + "/WEB-INF/cloutree.properties"));
+		props.load(stream);
 		
 		version = props.getProperty("server.version");
+		
+		initiated = true;
 		
 	}
 	
 	public static String getVersion() {
+		
+		if(!initiated) {
+			try {
+				init();
+			} catch (FileNotFoundException e) {
+				return null;
+			} catch (IOException e) {
+				return null;
+			}
+		}
+		
 		return version;
 	}
 	

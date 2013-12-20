@@ -209,11 +209,30 @@ public class ModelService {
         }
         return result;
     }
+    
+    @SuppressWarnings("unchecked")
+    public List<Model> getAllReleasedModels() {
+	
+        List<Model> result = null;
+        EntityManager mgr = this.emf.createEntityManager();
+        Query query = mgr.createQuery("SELECT m FROM " + Model.class.getName() + " m WHERE m.instance = :instance AND m.released = 1");
+        query.setParameter("instance", this.instance.getId());
+        try {
+            result = query.getResultList();
+        } catch(NoResultException e) {
+            log.log(Level.SEVERE, e.getMessage());
+            e.printStackTrace();
+            return null;
+        } finally {
+            mgr.close();
+        }
+        return result;
+    }
         
     @SuppressWarnings("unchecked")
     public List<Modelrevision> getRevisionsForModel(Model model) {
 	
-	List<Modelrevision> result = null;
+    	List<Modelrevision> result = null;
         EntityManager mgr = this.emf.createEntityManager();
         Query query = mgr.createQuery("SELECT mr FROM " + Modelrevision.class.getName() + " mr WHERE mr.model = :modelId ORDER BY mr.revision DESC");
         query.setParameter("modelId", model.getId());
@@ -228,9 +247,27 @@ public class ModelService {
         return result;
     }
     
+    public Modelrevision getActiveRevisionForModel(Model model) {
+	
+    	Modelrevision result = null;
+        EntityManager mgr = this.emf.createEntityManager();
+        Query query = mgr.createQuery("SELECT mr FROM " + Modelrevision.class.getName() + " mr WHERE mr.model = :modelId AND mr.revision = :revision");
+        query.setParameter("modelId", model.getId());
+        query.setParameter("revision", model.getActiveVersion());
+        try {
+            result = (Modelrevision)query.getSingleResult();
+        } catch(NoResultException e) {
+            log.log(Level.SEVERE, e.getMessage());
+            return null;
+        } finally {
+            mgr.close();
+        }
+        return result;
+    }
+    
     public Modelrevision getRevisionForModel(Model model, Integer revision) {
 	
-	Modelrevision result = null;
+    	Modelrevision result = null;
         EntityManager mgr = this.emf.createEntityManager();
         Query query = mgr.createQuery("SELECT mr FROM " + Modelrevision.class.getName() + " mr WHERE mr.model = :modelname AND mr.revision = :revision");
         query.setParameter("modelname", model.getName());

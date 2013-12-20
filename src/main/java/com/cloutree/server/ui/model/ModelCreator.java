@@ -104,7 +104,7 @@ public class ModelCreator extends CustomComponent implements Button.ClickListene
 		}
 		
 		String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
-	        File file = new File(basepath + "/WEB-INF/storage/live/pmml/" + model.getName() + "/");
+	        File file = new File(basepath + "/WEB-INF/storage/live/pmml/" + model.getId() + "_" + model.getName() + "/");
 	        if(!file.exists()) {
 	            file.mkdir();
 	        }

@@ -17,6 +17,8 @@ import java.util.Map;
  *
  * Since 09.09.2013
  */
+
+@Deprecated
 public class ModelParameterResult {
 
     private String user;

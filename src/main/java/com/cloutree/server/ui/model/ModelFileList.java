@@ -226,10 +226,10 @@ public class ModelFileList extends CustomComponent implements Receiver, Succeede
 		}
 		
 		Modelrevision modelRevision = new Modelrevision();
-		modelRevision.setId(this.model.getName() + "_" + revisionNumber);
+		modelRevision.setId(this.model.getId() + "_" + this.model.getName() + "_" + revisionNumber);
 		modelRevision.setModel(this.model.getId());
 		modelRevision.setRevision(revisionNumber);
-		modelRevision.setFile("/live/pmml/" + this.model.getName() + "/" + modelRevision.getId() + ".xml");
+		modelRevision.setFile("/live/pmml/" + this.model.getId() + "_" + this.model.getName() + "/" + modelRevision.getId() + ".xml");
 		
 		this.revisionInUpload = modelRevision;
 		

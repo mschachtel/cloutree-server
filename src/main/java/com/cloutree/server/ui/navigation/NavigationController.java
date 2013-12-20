@@ -41,9 +41,9 @@ public class NavigationController {
 		} else {
 		    navigator.navigateTo(Views.MAIN.name() + "/MODEL/" + modelName);
 		}
-	    }
+	 }
 	    
-	    public static void openUserNavigation() {
+	 public static void openUserNavigation() {
 		
 		Navigator navigator;
 		
@@ -60,6 +60,25 @@ public class NavigationController {
 		
 		navigator.navigateTo(Views.MAIN.name() + "/ADMIN/USERADMIN");
 	
-    }
+     }
+	 
+	 public static void openApiNavigation() {
+			
+		Navigator navigator;
+		
+		try {
+		    navigator = NavigationRegistry.getNavigator(Frames.MAIN);
+		} catch (Exception e) {
+		    log.log(Level.SEVERE, e.getMessage());
+		    return;
+		}
+		
+		if(navigator == null) {
+		    return;
+		}
+		
+		navigator.navigateTo(Views.MAIN.name() + "/ADMIN/APIADMIN");
+	
+     }
     
 }
