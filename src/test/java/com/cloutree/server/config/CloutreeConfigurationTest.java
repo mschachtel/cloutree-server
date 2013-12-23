@@ -39,6 +39,10 @@ public class CloutreeConfigurationTest {
 		
 	}
 	
+	/**
+	 * Test method for {@link com.cloutree.server.config.CloutreeConfiguration#getVersion()}.
+	 */
+	@Test
 	public void returnsVersion(){
 		try {
 			CloutreeConfiguration.init();
