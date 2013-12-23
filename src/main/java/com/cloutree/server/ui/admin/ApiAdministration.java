@@ -10,7 +10,6 @@ import java.util.List;
 import com.cloutree.server.permission.UIPermissionManager;
 import com.cloutree.server.permission.UserManager;
 import com.cloutree.server.persistence.entity.Apihost;
-import com.cloutree.server.persistence.entity.User;
 import com.cloutree.server.persistence.service.ApihostService;
 import com.cloutree.server.session.ClouTreeSession;
 import com.cloutree.server.ui.navigation.Views;
