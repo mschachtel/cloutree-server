@@ -79,7 +79,7 @@ public class UserService {
     @SuppressWarnings("unchecked")
 	public List<User> getAllUsers() {
 	
-	List<User> result = null;
+    	List<User> result = null;
         EntityManager mgr = this.emf.createEntityManager();
         Query query = mgr.createQuery("SELECT u FROM " + User.class.getName() + " u WHERE u.tenant.name = :tenant");
         query.setParameter("tenant", ClouTreeSession.getTenantName());

@@ -96,6 +96,7 @@ public class PmmlModelRevisionViewer extends CustomComponent {
 		this.labelRevisionId.setValue(this.modelRevision.getId());
 		this.labelRevisionNumber.setValue("Revision " + this.modelRevision.getRevision());
 	
+		this.pmmlModelTester.setModelEntity(model);
 		this.pmmlModelTester.setFile(this.modelRevision.getFile());
 		this.textFileViewer.setFile(this.modelRevision.getFile());
     }

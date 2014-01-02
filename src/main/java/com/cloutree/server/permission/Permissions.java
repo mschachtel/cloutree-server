@@ -14,6 +14,6 @@ package com.cloutree.server.permission;
  */
 public enum Permissions {
 
-    SUPERUSER, DEVELOPER, API
+    SUPERUSER, DEVELOPER, API, ROOT
     
 }

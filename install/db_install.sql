@@ -129,6 +129,9 @@ CREATE TABLE IF NOT EXISTS `tenant` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- INSTERT DEFAULT Tenant
+INSERT INTO `cloutree`.`tenant` (`name`, `adminuser`) VALUES ('DEFAULT', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -173,7 +176,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- Dumping data for table `user`
+-- Insert Root, Password is 'cloutree'
 --
+INSERT INTO `cloutree`.`user` (`id`, `tenant`, `username`, `password`, `salt`, `name`, `firstname`, `email`, `permission`, `active`) VALUES ('9', 'DEFAULT', 'ROOT', 'fb60e112c31132df95c0f2a43be7d8c0d7f604b5', '80948c5f7f1ce2ff', 'ROOT', 'ROOT', 'root@cloutree.com', 'ROOT', '1');
 
 ;

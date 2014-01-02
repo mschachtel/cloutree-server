@@ -6,6 +6,7 @@
 package com.cloutree.server.ui;
 
 import java.io.File;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -140,8 +141,10 @@ public class WorkBenchSplitViewUI extends CustomComponent implements View, Butto
     	this.instanceSelect.setImmediate(true);
     	this.instanceSelect.setNullSelectionAllowed(false);
     	
-    	if(tenant.getInstances() != null && tenant.getInstances().size() > 0) {
-	    	for(Instance instance : tenant.getInstances()) {
+    	List<Instance> instances = tenant.getInstances();;
+
+    	if(instances != null && instances.size() > 0) {
+	    	for(Instance instance : instances) {
 	    		this.instanceSelect.addItem(instance);
 	    	}
 	    	
@@ -149,8 +152,8 @@ public class WorkBenchSplitViewUI extends CustomComponent implements View, Butto
 	    	if(inst != null && this.instanceSelect.containsId(inst)) {
 	    		this.instanceSelect.select(inst);
 	    	} else {
-	    		this.instanceSelect.select(tenant.getInstances().get(0));
-	    		ClouTreeSession.setInstance(tenant.getInstances().get(0));
+	    		this.instanceSelect.select(instances.get(0));
+	    		ClouTreeSession.setInstance(instances.get(0));
 	    	}
 	    	
 	    	this.instanceSelect.addValueChangeListener(
