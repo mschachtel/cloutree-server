@@ -3,7 +3,7 @@
  * Copyright 2013 Marc Schachtel, Germany
  */
 
-package com.cloutree.server.api.registration;
+package com.cloutree.server.api.servlet;
 
 import java.io.IOException;
 import java.util.List;

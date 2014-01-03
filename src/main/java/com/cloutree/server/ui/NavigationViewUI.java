@@ -82,7 +82,7 @@ public class NavigationViewUI extends CustomComponent implements View {
 		// Help Menu
 		MenuBar.MenuItem helpMenu = mainMenuBar.addItem("About ClouTree",  null);
 		helpMenu.addItem("User Documentation / Handbook", null);
-		helpMenu.addItem("Version: " + CloutreeConfiguration.getVersion(), null);
+		helpMenu.addItem("Version: " + CloutreeConfiguration.getProperty(CloutreeConfiguration.SERVER_VERSION), null);
 	
     }
 

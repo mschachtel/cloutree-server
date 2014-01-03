@@ -8,6 +8,8 @@ package com.cloutree.server.api.push;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.cloutree.server.HttpSender;
 import com.cloutree.server.api.pojo.ActiveModel;
@@ -27,6 +29,8 @@ import com.cloutree.server.persistence.service.ModelService;
 
 public class ApiPushService {
 	
+	static Logger log = Logger.getLogger(ApiPushService.class.getName());
+	
 	private Apihost host;
 	
 	public ApiPushService(Apihost host) {
@@ -36,7 +40,7 @@ public class ApiPushService {
 	public ApiJsonObject getActiveModels() {
 		
 		if(this.host == null) {
-			//TODO
+			log.log(Level.SEVERE, "Host is null, can't synch!");
 			return null;
 		}
 		
@@ -68,7 +72,7 @@ public class ApiPushService {
 	public ApiJsonObject getSingleModels(Model model) {
 		
 		if(this.host == null) {
-			//TODO
+			log.log(Level.SEVERE, "Host is null, can't synch!");
 			return null;
 		}
 		
@@ -97,26 +101,28 @@ public class ApiPushService {
 	public void pushInitially(){
 
 		if(this.host == null) {
-			//TODO
+			log.log(Level.SEVERE, "Host is null, can't synch!");
 			return;
 		}
 		
 		ApiJsonObject apiJsonObject = this.getActiveModels();
 		
 		HttpSender.sendHttpPostJson(apiJsonObject.toJson(), this.host.getUrl());
+		log.log(Level.INFO, "Pushed " + apiJsonObject.toJson() + " to host " + this.host.getName() + "(" + this.host.getUrl() + ")");
 		
 	}
 	
 	public void pushModel(Model model){
 		
 		if(this.host == null) {
-			//TODO
+			log.log(Level.SEVERE, "Host is null, can't synch!");
 			return;
 		}
 		
 		ApiJsonObject apiJsonObject = this.getSingleModels(model);
 		
 		HttpSender.sendHttpPostJson(apiJsonObject.toJson(), this.host.getUrl());
+		log.log(Level.INFO, "Pushed " + apiJsonObject.toJson() + " to host " + this.host.getName() + "(" + this.host.getUrl() + ")");
 	}
 	
 }

@@ -54,7 +54,7 @@ public class CloutreeConfigurationTest {
 			return;
 		}
 		
-		String version = CloutreeConfiguration.getVersion();
+		String version = CloutreeConfiguration.getProperty(CloutreeConfiguration.SERVER_VERSION);
 		
 		Assert.assertTrue(version != null && !version.isEmpty());
 		

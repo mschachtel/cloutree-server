@@ -119,7 +119,7 @@ public class LoginUI extends CustomComponent implements Button.ClickListener, Vi
 		/* MenuBar */
 		// About
 		MenuBar.MenuItem about = menuBar.addItem("About ClouTree", null);
-		about.addItem("Version: " + CloutreeConfiguration.getVersion(), null);
+		about.addItem("Version: " + CloutreeConfiguration.getProperty(CloutreeConfiguration.SERVER_VERSION), null);
 		
 		// Enter-Listener for login
 		ShortcutListener enterListener = new ShortcutListener("ENTER", ShortcutAction.KeyCode.ENTER, null) {

@@ -18,44 +18,39 @@ public class CloutreeConfiguration {
 	static Logger log = Logger.getLogger(CloutreeConfiguration.class.getName());
 
 	private static Properties props;
-	
-	private static String version;
-	
 	private static boolean initiated = false;
+	
+	/** PROPERTIES KEYS **/
+	public static String SERVER_VERSION = "server.version";
+	public static String SERVER_STORAGE_PATH = "server.storage.path";
 	
 	public static void init() throws FileNotFoundException, IOException {
 
-		String fileName = "/cloutree.properties"; 
-		InputStream stream = CloutreeConfiguration.class.getResourceAsStream(fileName);
-		
-		if(stream == null) {
-			throw new FileNotFoundException("Stream seems to be null pointing at config-file " + fileName + ". Unable to initiate configuration!");
-		}
+		String fileName = "cloutree.properties" ; 
+		InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
 		
 		props = new Properties();
 		props.load(stream);
-		
-		version = props.getProperty("server.version");
 		
 		initiated = true;
 		
 	}
 	
-	public static String getVersion() {
-		
-		if(!initiated) {
-			try {
-				init();
-			} catch (FileNotFoundException e) {
-				log.log(Level.SEVERE, "Configuration not found: " + e.getMessage());
-				return null;
-			} catch (IOException e) {
-				log.log(Level.SEVERE, "Configuration not found: " + e.getMessage());
-				return null;
-			}
+	private static void hopeInit() {
+		try {
+			init();
+		} catch (FileNotFoundException e) {
+			log.log(Level.SEVERE, e.getMessage());
+			return;
+		} catch (IOException e) {
+			log.log(Level.SEVERE, e.getMessage());
+			return;
 		}
-		
-		return version;
+	}
+	
+	public static String getProperty(String key) {
+		if(!initiated) hopeInit();
+		return props.getProperty(key);
 	}
 	
 }

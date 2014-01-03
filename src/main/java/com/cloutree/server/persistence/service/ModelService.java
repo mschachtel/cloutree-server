@@ -16,11 +16,13 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import com.cloutree.server.api.push.ApiPushService;
+import com.cloutree.server.config.CloutreeConfiguration;
+import com.cloutree.server.persistence.entity.Apihost;
 import com.cloutree.server.persistence.entity.Instance;
 import com.cloutree.server.persistence.entity.Model;
 import com.cloutree.server.persistence.entity.Modelrevision;
 import com.cloutree.server.persistence.service.log.DBLogger;
-import com.vaadin.server.VaadinService;
 
 /**
  * ModelService
@@ -151,6 +153,17 @@ public class ModelService {
             DBLogger.logAccess("UPDATE_MODEL", model.getName());
             
         }
+        
+        // Now push model to APIs
+        ApihostService apihostService = new ApihostService(this.instance);
+        List<Apihost> hosts = apihostService.getAllAvailableApihosts();
+        
+        ApiPushService pushService;
+        for(Apihost host : hosts) {
+        	pushService = new ApiPushService(host);
+        	pushService.pushModel(model);
+        }
+        
         return true;
     }
     
@@ -284,8 +297,8 @@ public class ModelService {
     }
     
     private void deleteRevisionDirectory(Modelrevision revision) {
-		String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
-		File file = new File(basepath + "/WEB-INF/storage" + revision.getFile());
+    	String storagePath = CloutreeConfiguration.getProperty(CloutreeConfiguration.SERVER_STORAGE_PATH);
+		File file = new File(storagePath + revision.getFile());
 		if(file.exists()) {
 		    file.getParentFile().delete();
 		}

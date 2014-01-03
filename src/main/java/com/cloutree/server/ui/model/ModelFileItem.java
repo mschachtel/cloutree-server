@@ -164,7 +164,7 @@ public class ModelFileItem extends CustomComponent implements Button.ClickListen
 	    this.model.setActiveVersion(this.modelrevision.getRevision());
 	    ModelService modelService = new ModelService(ClouTreeSession.getInstance());
 	    if(!modelService.updateModel(this.model)){
-		Notification.show("Unable to activate revision", Notification.Type.ERROR_MESSAGE);
+	    	Notification.show("Unable to activate revision", Notification.Type.ERROR_MESSAGE);
 		return;
 	    }
 	    

@@ -23,6 +23,7 @@ import com.cloutree.modelevaluator.PredictiveModel;
 import com.cloutree.modelevaluator.PredictiveModelFactory;
 import com.cloutree.modelevaluator.PredictiveModelResult;
 import com.cloutree.server.api.session.APISession;
+import com.cloutree.server.config.CloutreeConfiguration;
 import com.cloutree.server.permission.Permissions;
 import com.cloutree.server.persistence.entity.Model;
 import com.cloutree.server.persistence.entity.Modelrevision;
@@ -262,8 +263,8 @@ public class ModelEvaluationServlet extends HttpServlet {
     private PredictiveModel initiatePredictiveModel(Model model, String filePath) {
 	
 		// Set File
-		String basepath = getServletContext().getRealPath("");
-		File file = new File(basepath + "/WEB-INF/storage" + filePath);
+		String storagePath = CloutreeConfiguration.getProperty(CloutreeConfiguration.SERVER_STORAGE_PATH);
+		File file = new File(storagePath + filePath);
 		PredictiveModel result = null;
 		
 		try {

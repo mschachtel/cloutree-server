@@ -32,7 +32,7 @@ public class ApiJsonObject {
 	private ApiBody requestBody;
 
 	public ApiJsonObject() {
-		this.requestorVersion = CloutreeConfiguration.getVersion();
+		this.requestorVersion = CloutreeConfiguration.getProperty(CloutreeConfiguration.SERVER_VERSION);
 	}
 	
 	
