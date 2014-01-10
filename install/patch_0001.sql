@@ -1,0 +1,1 @@
+ALTER TABLE  `apihost` ADD  `secret` VARCHAR( 32 ) NOT NULL ;

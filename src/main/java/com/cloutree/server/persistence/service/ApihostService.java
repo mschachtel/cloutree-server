@@ -107,6 +107,32 @@ public class ApihostService {
         return true;
     }
     
+    public boolean switchHostStatus(Apihost apihost) {
+    	
+    	if(!apihost.getInstance().getId().equals(this.instance.getId())) {
+    		log.log(Level.WARNING, "Not allowed to save Apihost with instance" + apihost.getInstance().getName());
+    	}
+    	
+    	if(apihost.getStatus() > 0) {
+    		apihost.setStatus(0);
+    	} else {
+    		apihost.setStatus(1);
+    	}
+    	
+        EntityManager mgr = this.emf.createEntityManager();
+        try {
+            mgr.getTransaction().begin();
+            mgr.merge(apihost);
+            mgr.getTransaction().commit();
+        } catch(Exception e) {
+            log.log(Level.SEVERE, e.getMessage());
+            return false;
+        } finally {
+            mgr.close();
+        }
+        return true;
+    }
+    
     public boolean deleteApihost(Apihost apihost) {
 	
     	if(!apihost.getInstance().getId().equals(this.instance.getId())) {
@@ -115,7 +141,9 @@ public class ApihostService {
     	
         EntityManager mgr = this.emf.createEntityManager();
         try {
-            mgr.remove(apihost);
+        	mgr.getTransaction().begin();
+            Apihost host = mgr.merge(apihost);
+            mgr.remove(host);
             mgr.getTransaction().commit();
         } catch(Exception e) {
             log.log(Level.SEVERE, e.getMessage());

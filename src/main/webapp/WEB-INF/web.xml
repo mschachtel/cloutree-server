@@ -22,6 +22,10 @@
         <servlet-class>com.cloutree.server.api.servlet.ApiRegistrationServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ApiUnregistrationServlet</servlet-name>
+        <servlet-class>com.cloutree.server.api.servlet.ApiUnregistrationServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ModelFileDownloadServlet</servlet-name>
         <servlet-class>com.cloutree.server.api.servlet.ModelFileDownloadServlet</servlet-class>
     </servlet>
@@ -33,6 +37,11 @@
 	<servlet-mapping>
         <servlet-name>ApiRegistrationServlet</servlet-name>
         <url-pattern>/api/register</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ApiUnregistrationServlet</servlet-name>
+        <url-pattern>/api/unregister</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>

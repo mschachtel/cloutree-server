@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cloutree.server.api.push.ApiPushService;
 import com.cloutree.server.api.session.APISession;
 import com.cloutree.server.persistence.entity.Apihost;
 import com.cloutree.server.persistence.entity.Instance;
@@ -28,11 +27,11 @@ import com.cloutree.server.persistence.service.ApihostService;
  *
  */
 
-public class ApiRegistrationServlet extends HttpServlet {
+public class ApiUnregistrationServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 459985480571809796L;
 	
-	static Logger log = Logger.getLogger(ApiRegistrationServlet.class.getName());
+	static Logger log = Logger.getLogger(ApiUnregistrationServlet.class.getName());
 
 	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -41,18 +40,18 @@ public class ApiRegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		log.log(Level.INFO, "Try to register API from: " + req.getRemoteAddr());
+		log.log(Level.INFO, "Try to un-register API from: " + req.getRemoteAddr());
 		
 		String userName = req.getParameter("CLOUTREE:USER");
 		String pass = req.getParameter("CLOUTREE:PASS");
 		String tenant = req.getParameter("CLOUTREE:TENANT");
 		String apiName = req.getParameter("CLOUTREE:APINAME");
 
-		log.log(Level.INFO, "Registration Details: User[" + userName + "] - Tenant[" + tenant + "] - API-NAME[" + apiName + "]");
+		log.log(Level.INFO, "Un-Registration Details: User[" + userName + "] - Tenant[" + tenant + "] - API-NAME[" + apiName + "]");
 		
 		if(!APISession.isLoggedIn(req)) {
 			if(!APISession.login(userName, tenant, pass, req)){
-				log.log(Level.WARNING, "Log in of " + userName + "@" + tenant + "failed. API not registered.");
+				log.log(Level.WARNING, "Log in of " + userName + "@" + tenant + "failed. API not un-registered.");
 				return;
 			}
 		}
@@ -63,13 +62,9 @@ public class ApiRegistrationServlet extends HttpServlet {
 			ApihostService service = new ApihostService(instance);
 			Apihost host = service.getApihost(apiName);
 			if(host != null) {
-				ApiPushService pushService = new ApiPushService(host);
-				pushService.pushInitially();
 				service.switchHostStatus(host);
 			}
 		}
-		
-		resp.setStatus(200);
 		
 	}
 }

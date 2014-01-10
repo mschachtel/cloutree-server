@@ -30,6 +30,8 @@ public class Apihost {
 	private Instance instance;
 	
 	private Integer status;
+	
+	private String secret;
 
 	/**
 	 * @return the name
@@ -99,6 +101,20 @@ public class Apihost {
 	 */
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	/**
+	 * @return the secret
+	 */
+	public String getSecret() {
+		return secret;
+	}
+
+	/**
+	 * @param secret the secret to set
+	 */
+	public void setSecret(String secret) {
+		this.secret = secret;
 	} 
 	
 }

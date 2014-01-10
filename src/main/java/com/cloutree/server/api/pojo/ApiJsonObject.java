@@ -29,6 +29,8 @@ public class ApiJsonObject {
 	
 	private String error = "";
 	
+	private String tenant = "";
+	
 	private ApiBody requestBody;
 
 	public ApiJsonObject() {
@@ -105,6 +107,30 @@ public class ApiJsonObject {
 	 */
 	public void setError(String error) {
 		this.error = error;
+	}
+
+
+	/**
+	 * @return the tenant
+	 */
+	public String getTenant() {
+		return tenant;
+	}
+
+
+	/**
+	 * @param tenant the tenant to set
+	 */
+	public void setTenant(String tenant) {
+		this.tenant = tenant;
+	}
+
+
+	/**
+	 * @param requestorVersion the requestorVersion to set
+	 */
+	public void setRequestorVersion(String requestorVersion) {
+		this.requestorVersion = requestorVersion;
 	}
 
 

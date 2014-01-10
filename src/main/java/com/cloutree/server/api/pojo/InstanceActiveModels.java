@@ -25,6 +25,8 @@ public class InstanceActiveModels implements ApiBody {
 	
 	private Date timestamp;
 	
+	private String secret;
+	
 	/**
 	 * @param instanceName the instanceName to set
 	 */
@@ -67,6 +69,20 @@ public class InstanceActiveModels implements ApiBody {
 		return timestamp;
 	}
 	
+	/**
+	 * @return the secret
+	 */
+	public String getSecret() {
+		return secret;
+	}
+
+	/**
+	 * @param secret the secret to set
+	 */
+	public void setSecret(String secret) {
+		this.secret = secret;
+	}
+
 	public String toJson() {
 		JSONSerializer serializer = new JSONSerializer();
 		return serializer.include("activeModels").serialize(this);

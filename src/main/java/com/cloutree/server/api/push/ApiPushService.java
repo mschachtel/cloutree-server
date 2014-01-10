@@ -63,7 +63,9 @@ public class ApiPushService {
 		apiBody.setActiveModels(activeModels);
 		apiBody.setInstanceName(this.host.getInstance().getName());
 		apiBody.setTimestamp(new Date());
+		apiBody.setSecret(this.host.getSecret());
 		
+		apiJsonObject.setTenant(this.host.getInstance().getTenant().getName());
 		apiJsonObject.setRequestBody(apiBody);
 		
 		return apiJsonObject;
@@ -92,7 +94,9 @@ public class ApiPushService {
 		apiBody.setActiveModels(activeModels);
 		apiBody.setInstanceName(this.host.getInstance().getName());
 		apiBody.setTimestamp(new Date());
+		apiBody.setSecret(this.host.getSecret());
 		
+		apiJsonObject.setTenant(this.host.getInstance().getTenant().getName());
 		apiJsonObject.setRequestBody(apiBody);
 		
 		return apiJsonObject;
